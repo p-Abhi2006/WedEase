@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WedEase - Customer, Vendor, and Admin Authentication Portals">
+  <title>WedEase Portal | Login & Registration</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page-body">
+
+  <!-- Minimal Brand Header -->
+  <header class="auth-header">
+    <div class="container auth-header-inner">
+      <a href="index.html" class="brand-logo" aria-label="WedEase Home">
+        <svg class="brand-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="16" r="9" stroke="currentColor" stroke-width="2.5" opacity="0.85"/>
+          <circle cx="20" cy="16" r="9" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M16 10L17.5 13L21 13.5L18.5 16L19 19.5L16 18L13 19.5L13.5 16L11 13.5L14.5 13L16 10Z" fill="currentColor"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">WedEase</span>
+          <span class="brand-tagline">Wedding Planning Platform</span>
+        </div>
+      </a>
+      <a href="index.html" class="btn btn-outline btn-sm">← Back to Website</a>
+    </div>
+  </header>
+
+  <main class="auth-main-container">
+    <div class="auth-card-wrap">
+      
+      <!-- Role Switcher Tabs -->
+      <div class="role-selector-tabs" role="tablist" aria-label="Portal Selection">
+        <button type="button" class="role-tab active" data-role="customer" role="tab" aria-selected="true">
+          <span class="role-icon">💍</span>
+          <span>Customer Portal</span>
+        </button>
+        <button type="button" class="role-tab" data-role="vendor" role="tab" aria-selected="false">
+          <span class="role-icon">🏢</span>
+          <span>Vendor Portal</span>
+        </button>
+        <button type="button" class="role-tab" data-role="admin" role="tab" aria-selected="false">
+          <span class="role-icon">🛡️</span>
+          <span>Admin Portal</span>
+        </button>
+      </div>
+
+      <!-- Demo Credentials Quick Helper Box -->
+      <div class="demo-credentials-banner">
+        <div class="demo-badge">💡 Quick Demo Access</div>
+        <div class="demo-accounts-row">
+          <button type="button" class="quick-fill-btn" id="fillDemoCustomer">
+            Fill Demo Customer <small>(ananya@example.com)</small>
+          </button>
+          <button type="button" class="quick-fill-btn" id="fillDemoVendor">
+            Fill Demo Vendor <small>(vendor@royalconvention.com)</small>
+          </button>
+          <button type="button" class="quick-fill-btn admin-fill" id="fillDemoAdmin">
+            Fill Demo Admin <small>(admin@wedease.com)</small>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Auth Box -->
+      <div class="auth-box">
+
+        <!-- ==========================================
+             PANEL 1: CUSTOMER AUTH
+             ========================================== -->
+        <div class="auth-panel" id="customerPanel">
+          <div class="auth-panel-header text-center">
+            <span class="auth-subtitle">Couples & Organizers</span>
+            <h1 class="auth-title" id="customerAuthTitle">Customer Login</h1>
+            <p class="auth-desc" id="customerAuthDesc">Sign in to manage your shortlisted vendors, custom packages, and budget.</p>
+          </div>
+
+          <!-- Alert Messages -->
+          <div class="auth-alert" id="customerAlert" style="display: none;"></div>
+
+          <!-- Sub-tabs: Login / Register toggle -->
+          <div class="sub-toggle-wrap">
+            <button type="button" class="sub-tab active" id="customerLoginTab">Sign In</button>
+            <button type="button" class="sub-tab" id="customerRegisterTab">Create Account</button>
+          </div>
+
+          <!-- Customer Login Form -->
+          <form id="customerLoginForm" class="auth-form" novalidate>
+            <div class="form-group">
+              <label for="custLoginEmail" class="form-label">Email Address</label>
+              <input type="email" id="custLoginEmail" class="form-control" placeholder="ananya@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="custLoginPassword" class="form-label">Password</label>
+              <div class="password-input-wrap">
+                <input type="password" id="custLoginPassword" class="form-control" placeholder="••••••••" required>
+                <button type="button" class="toggle-password-btn" data-target="custLoginPassword" aria-label="Toggle password visibility">👁️</button>
+              </div>
+            </div>
+
+            <div class="form-meta-row">
+              <label class="remember-label">
+                <input type="checkbox" id="custRememberMe" checked>
+                <span>Remember me</span>
+              </label>
+              <a href="#" class="forgot-link" id="custForgotPass">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg">
+              Sign In as Customer ➔
+            </button>
+
+            <div class="switch-mode-text text-center">
+              Don't have a WedEase account? 
+              <button type="button" class="link-btn" id="switchToCustRegister">Register here</button>
+            </div>
+          </form>
+
+          <!-- Customer Registration Form -->
+          <form id="customerRegisterForm" class="auth-form" style="display: none;" novalidate>
+            <div class="form-group">
+              <label for="custRegName" class="form-label">Full Name <span class="required">*</span></label>
+              <input type="text" id="custRegName" class="form-control" placeholder="e.g. Ananya Sharma" required>
+            </div>
+
+            <div class="form-group">
+              <label for="custRegEmail" class="form-label">Email Address <span class="required">*</span></label>
+              <input type="email" id="custRegEmail" class="form-control" placeholder="ananya@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="custRegPhone" class="form-label">Phone Number (10 digits) <span class="required">*</span></label>
+              <input type="tel" id="custRegPhone" class="form-control" placeholder="9876543210" pattern="[0-9]{10}" required>
+            </div>
+
+            <div class="form-group">
+              <label for="custRegCity" class="form-label">Celebration City</label>
+              <select id="custRegCity" class="form-control">
+                <option value="Bangalore">Bangalore</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi NCR">Delhi NCR</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Kochi">Kochi</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="custRegDate" class="form-label">Tentative Wedding Date (Optional)</label>
+              <input type="date" id="custRegDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="custRegPassword" class="form-label">Password <span class="required">*</span></label>
+              <div class="password-input-wrap">
+                <input type="password" id="custRegPassword" class="form-control" placeholder="At least 6 characters" required>
+                <button type="button" class="toggle-password-btn" data-target="custRegPassword" aria-label="Toggle password visibility">👁️</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="custRegConfirmPassword" class="form-label">Confirm Password <span class="required">*</span></label>
+              <div class="password-input-wrap">
+                <input type="password" id="custRegConfirmPassword" class="form-control" placeholder="Re-enter password" required>
+                <button type="button" class="toggle-password-btn" data-target="custRegConfirmPassword" aria-label="Toggle password visibility">👁️</button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg">
+              Create Customer Account ➔
+            </button>
+
+            <div class="switch-mode-text text-center">
+              Already registered? 
+              <button type="button" class="link-btn" id="switchToCustLogin">Sign in here</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ==========================================
+             PANEL 2: VENDOR AUTH
+             ========================================== -->
+        <div class="auth-panel" id="vendorPanel" style="display: none;">
+          <div class="auth-panel-header text-center">
+            <span class="auth-subtitle">Service Partners & Venues</span>
+            <h1 class="auth-title" id="vendorAuthTitle">Vendor Portal Login</h1>
+            <p class="auth-desc" id="vendorAuthDesc">Access your business profile, respond to customer enquiries, and manage bookings.</p>
+          </div>
+
+          <!-- Alert Messages -->
+          <div class="auth-alert" id="vendorAlert" style="display: none;"></div>
+
+          <!-- Sub-tabs: Login / Register toggle -->
+          <div class="sub-toggle-wrap">
+            <button type="button" class="sub-tab active" id="vendorLoginTab">Vendor Sign In</button>
+            <button type="button" class="sub-tab" id="vendorRegisterTab">Partner Registration</button>
+          </div>
+
+          <!-- Vendor Login Form -->
+          <form id="vendorLoginForm" class="auth-form" novalidate>
+            <div class="form-group">
+              <label for="vendorLoginEmail" class="form-label">Registered Business Email</label>
+              <input type="email" id="vendorLoginEmail" class="form-control" placeholder="vendor@royalconvention.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="vendorLoginPassword" class="form-label">Password</label>
+              <div class="password-input-wrap">
+                <input type="password" id="vendorLoginPassword" class="form-control" placeholder="••••••••" required>
+                <button type="button" class="toggle-password-btn" data-target="vendorLoginPassword" aria-label="Toggle password visibility">👁️</button>
+              </div>
+            </div>
+
+            <div class="form-meta-row">
+              <label class="remember-label">
+                <input type="checkbox" id="vendorRememberMe" checked>
+                <span>Remember me</span>
+              </label>
+              <a href="#" class="forgot-link" id="vendorForgotPass">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-gold btn-block btn-lg">
+              Sign In to Vendor Dashboard ➔
+            </button>
+
+            <div class="switch-mode-text text-center">
+              Want to partner with WedEase? 
+              <button type="button" class="link-btn" id="switchToVendorRegister">Register your business</button>
+            </div>
+          </form>
+
+          <!-- Vendor Registration Form -->
+          <form id="vendorRegisterForm" class="auth-form" style="display: none;" novalidate>
+            <div class="form-group">
+              <label for="vendRegBusinessName" class="form-label">Business / Brand Name <span class="required">*</span></label>
+              <input type="text" id="vendRegBusinessName" class="form-control" placeholder="e.g. Royal Grand Convention Palace" required>
+            </div>
+
+            <div class="form-group">
+              <label for="vendRegOwnerName" class="form-label">Owner / Manager Name <span class="required">*</span></label>
+              <input type="text" id="vendRegOwnerName" class="form-control" placeholder="e.g. Rajesh Kumar" required>
+            </div>
+
+            <div class="form-group">
+              <label for="vendRegEmail" class="form-label">Business Email <span class="required">*</span></label>
+              <input type="email" id="vendRegEmail" class="form-control" placeholder="vendor@royalconvention.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="vendRegPhone" class="form-label">Phone Number <span class="required">*</span></label>
+              <input type="tel" id="vendRegPhone" class="form-control" placeholder="9811223344" pattern="[0-9]{10}" required>
+            </div>
+
+            <div class="form-group">
+              <label for="vendRegCategory" class="form-label">Primary Service Category <span class="required">*</span></label>
+              <select id="vendRegCategory" class="form-control" required>
+                <option value="">Select Category...</option>
+                <option value="venue">Marriage Halls & Auditoriums</option>
+                <option value="catering">Catering</option>
+                <option value="photography">Photography & Videography</option>
+                <option value="decoration">Decoration</option>
+                <option value="makeup">Makeup & Beauty</option>
+                <option value="vehicle">Vehicle Rental</option>
+                <option value="event-management">Event Management</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="vendRegCity" class="form-label">Operating City <span class="required">*</span></label>
+              <select id="vendRegCity" class="form-control" required>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi NCR">Delhi NCR</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Kochi">Kochi</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="vendRegStartingPrice" class="form-label">Starting Price Display</label>
+              <input type="text" id="vendRegStartingPrice" class="form-control" placeholder="e.g. ₹1,50,000 / day or ₹850 / plate">
+            </div>
+
+            <div class="form-group">
+              <label for="vendRegPassword" class="form-label">Password <span class="required">*</span></label>
+              <div class="password-input-wrap">
+                <input type="password" id="vendRegPassword" class="form-control" placeholder="At least 6 characters" required>
+                <button type="button" class="toggle-password-btn" data-target="vendRegPassword" aria-label="Toggle password visibility">👁️</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="vendRegConfirmPassword" class="form-label">Confirm Password <span class="required">*</span></label>
+              <div class="password-input-wrap">
+                <input type="password" id="vendRegConfirmPassword" class="form-control" placeholder="Re-enter password" required>
+                <button type="button" class="toggle-password-btn" data-target="vendRegConfirmPassword" aria-label="Toggle password visibility">👁️</button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-gold btn-block btn-lg">
+              Register as Vendor Partner ➔
+            </button>
+
+            <div class="switch-mode-text text-center">
+              Already a partner? 
+              <button type="button" class="link-btn" id="switchToVendorLogin">Sign in here</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ==========================================
+             PANEL 3: ADMIN AUTH
+             ========================================== -->
+        <div class="auth-panel" id="adminPanel" style="display: none;">
+          <div class="auth-panel-header text-center">
+            <span class="auth-subtitle">Platform Administration</span>
+            <h1 class="auth-title">Admin Console</h1>
+            <p class="auth-desc">Secure access for platform moderation, vendor approvals, and system analytics.</p>
+          </div>
+
+          <!-- Alert Messages -->
+          <div class="auth-alert" id="adminAlert" style="display: none;"></div>
+
+          <form id="adminLoginForm" class="auth-form" novalidate>
+            <div class="form-group">
+              <label for="adminEmail" class="form-label">Admin Email or Username</label>
+              <input type="text" id="adminEmail" class="form-control" placeholder="admin@wedease.com or admin" required>
+            </div>
+
+            <div class="form-group">
+              <label for="adminPassword" class="form-label">Admin Password</label>
+              <div class="password-input-wrap">
+                <input type="password" id="adminPassword" class="form-control" placeholder="••••••••" required>
+                <button type="button" class="toggle-password-btn" data-target="adminPassword" aria-label="Toggle password visibility">👁️</button>
+              </div>
+            </div>
+
+            <div class="form-meta-row">
+              <span style="font-size: 0.8rem; color: var(--text-light);">Default demo: admin@wedease.com / admin123</span>
+              <a href="#" class="forgot-link" id="adminForgotPass">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg" style="background: linear-gradient(135deg, #702632, #40161d);">
+              Access Admin Dashboard ➔
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Prototype Disclaimer -->
+      <div class="auth-prototype-disclaimer text-center">
+        <small>⚠️ <strong>Prototype Demo:</strong> Sessions and credentials are simulated using browser <code>localStorage</code> for testing and evaluation. No real production credentials are stored.</small>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Parse URL params (e.g. login.html?role=vendor&action=register)
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialRole = urlParams.get('role') || 'customer';
+      const initialAction = urlParams.get('action') || 'login';
+
+      switchRole(initialRole);
+      if (initialAction === 'register') {
+        if (initialRole === 'customer') showCustomerRegister();
+        if (initialRole === 'vendor') showVendorRegister();
+      }
+
+      // 2. Role tab switches
+      document.querySelectorAll('.role-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          const role = tab.getAttribute('data-role');
+          switchRole(role);
+        });
+      });
+
+      function switchRole(role) {
+        document.querySelectorAll('.role-tab').forEach(t => {
+          const match = t.getAttribute('data-role') === role;
+          t.classList.toggle('active', match);
+          t.setAttribute('aria-selected', String(match));
+        });
+
+        document.getElementById('customerPanel').style.display = (role === 'customer') ? 'block' : 'none';
+        document.getElementById('vendorPanel').style.display = (role === 'vendor') ? 'block' : 'none';
+        document.getElementById('adminPanel').style.display = (role === 'admin') ? 'block' : 'none';
+      }
+
+      // 3. Password visibility toggle
+      document.querySelectorAll('.toggle-password-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          const input = document.getElementById(targetId);
+          if (input) {
+            const isPass = input.type === 'password';
+            input.type = isPass ? 'text' : 'password';
+            btn.textContent = isPass ? '🙈' : '👁️';
+          }
+        });
+      });
+
+      // 4. Quick Demo Fill Buttons
+      document.getElementById('fillDemoCustomer')?.addEventListener('click', () => {
+        switchRole('customer');
+        showCustomerLogin();
+        document.getElementById('custLoginEmail').value = 'ananya@example.com';
+        document.getElementById('custLoginPassword').value = 'password123';
+        showAlert('customerAlert', 'Demo customer credentials pre-filled!', 'success');
+      });
+
+      document.getElementById('fillDemoVendor')?.addEventListener('click', () => {
+        switchRole('vendor');
+        showVendorLogin();
+        document.getElementById('vendorLoginEmail').value = 'vendor@royalconvention.com';
+        document.getElementById('vendorLoginPassword').value = 'vendor123';
+        showAlert('vendorAlert', 'Demo vendor credentials pre-filled!', 'success');
+      });
+
+      document.getElementById('fillDemoAdmin')?.addEventListener('click', () => {
+        switchRole('admin');
+        document.getElementById('adminEmail').value = 'admin@wedease.com';
+        document.getElementById('adminPassword').value = 'admin123';
+        showAlert('adminAlert', 'Demo admin credentials pre-filled!', 'success');
+      });
+
+      // 5. Sub-tabs toggling (Customer)
+      function showCustomerLogin() {
+        document.getElementById('customerLoginForm').style.display = 'block';
+        document.getElementById('customerRegisterForm').style.display = 'none';
+        document.getElementById('customerLoginTab').classList.add('active');
+        document.getElementById('customerRegisterTab').classList.remove('active');
+        document.getElementById('customerAuthTitle').textContent = 'Customer Login';
+        document.getElementById('customerAuthDesc').textContent = 'Sign in to manage your shortlisted vendors, custom packages, and budget.';
+      }
+
+      function showCustomerRegister() {
+        document.getElementById('customerLoginForm').style.display = 'none';
+        document.getElementById('customerRegisterForm').style.display = 'block';
+        document.getElementById('customerLoginTab').classList.remove('active');
+        document.getElementById('customerRegisterTab').classList.add('active');
+        document.getElementById('customerAuthTitle').textContent = 'Customer Registration';
+        document.getElementById('customerAuthDesc').textContent = 'Create your account to start curating your wedding celebration.';
+      }
+
+      document.getElementById('customerLoginTab')?.addEventListener('click', showCustomerLogin);
+      document.getElementById('customerRegisterTab')?.addEventListener('click', showCustomerRegister);
+      document.getElementById('switchToCustRegister')?.addEventListener('click', showCustomerRegister);
+      document.getElementById('switchToCustLogin')?.addEventListener('click', showCustomerLogin);
+
+      // 6. Sub-tabs toggling (Vendor)
+      function showVendorLogin() {
+        document.getElementById('vendorLoginForm').style.display = 'block';
+        document.getElementById('vendorRegisterForm').style.display = 'none';
+        document.getElementById('vendorLoginTab').classList.add('active');
+        document.getElementById('vendorRegisterTab').classList.remove('active');
+        document.getElementById('vendorAuthTitle').textContent = 'Vendor Portal Login';
+        document.getElementById('vendorAuthDesc').textContent = 'Access your business profile, respond to customer enquiries, and manage bookings.';
+      }
+
+      function showVendorRegister() {
+        document.getElementById('vendorLoginForm').style.display = 'none';
+        document.getElementById('vendorRegisterForm').style.display = 'block';
+        document.getElementById('vendorLoginTab').classList.remove('active');
+        document.getElementById('vendorRegisterTab').classList.add('active');
+        document.getElementById('vendorAuthTitle').textContent = 'Vendor Partner Registration';
+        document.getElementById('vendorAuthDesc').textContent = 'Join WedEase as a verified wedding service partner.';
+      }
+
+      document.getElementById('vendorLoginTab')?.addEventListener('click', showVendorLogin);
+      document.getElementById('vendorRegisterTab')?.addEventListener('click', showVendorRegister);
+      document.getElementById('switchToVendorRegister')?.addEventListener('click', showVendorRegister);
+      document.getElementById('switchToVendorLogin')?.addEventListener('click', showVendorLogin);
+
+      // 7. Form Handlers: Customer Login
+      document.getElementById('customerLoginForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('custLoginEmail').value.trim();
+        const pass = document.getElementById('custLoginPassword').value;
+
+        const result = AuthManager.login('customer', email, pass);
+        if (result.success) {
+          showAlert('customerAlert', 'Login successful! Redirecting to customer dashboard...', 'success');
+          setTimeout(() => { window.location.href = result.redirect; }, 600);
+        } else {
+          showAlert('customerAlert', result.message, 'danger');
+        }
+      });
+
+      // 8. Form Handlers: Customer Register
+      document.getElementById('customerRegisterForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('custRegName').value.trim();
+        const email = document.getElementById('custRegEmail').value.trim();
+        const phone = document.getElementById('custRegPhone').value.trim();
+        const city = document.getElementById('custRegCity').value;
+        const weddingDate = document.getElementById('custRegDate').value;
+        const pass = document.getElementById('custRegPassword').value;
+        const confirmPass = document.getElementById('custRegConfirmPassword').value;
+
+        if (!name || !email || !phone || !pass) {
+          showAlert('customerAlert', 'Please complete all required fields.', 'danger');
+          return;
+        }
+
+        if (phone.replace(/[^0-9]/g, '').length < 10) {
+          showAlert('customerAlert', 'Please enter a valid 10-digit mobile number.', 'danger');
+          return;
+        }
+
+        if (pass.length < 6) {
+          showAlert('customerAlert', 'Password must be at least 6 characters.', 'danger');
+          return;
+        }
+
+        if (pass !== confirmPass) {
+          showAlert('customerAlert', 'Passwords do not match.', 'danger');
+          return;
+        }
+
+        const result = AuthManager.registerCustomer({ name, email, phone, city, weddingDate, password: pass });
+        if (result.success) {
+          showAlert('customerAlert', 'Account created successfully! Redirecting to your dashboard...', 'success');
+          setTimeout(() => { window.location.href = result.redirect; }, 700);
+        } else {
+          showAlert('customerAlert', result.message, 'danger');
+        }
+      });
+
+      // 9. Form Handlers: Vendor Login
+      document.getElementById('vendorLoginForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('vendorLoginEmail').value.trim();
+        const pass = document.getElementById('vendorLoginPassword').value;
+
+        const result = AuthManager.login('vendor', email, pass);
+        if (result.success) {
+          showAlert('vendorAlert', 'Vendor authenticated! Redirecting to dashboard...', 'success');
+          setTimeout(() => { window.location.href = result.redirect; }, 600);
+        } else {
+          showAlert('vendorAlert', result.message, 'danger');
+        }
+      });
+
+      // 10. Form Handlers: Vendor Register
+      document.getElementById('vendorRegisterForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const businessName = document.getElementById('vendRegBusinessName').value.trim();
+        const ownerName = document.getElementById('vendRegOwnerName').value.trim();
+        const email = document.getElementById('vendRegEmail').value.trim();
+        const phone = document.getElementById('vendRegPhone').value.trim();
+        const categorySelect = document.getElementById('vendRegCategory');
+        const category = categorySelect.value;
+        const categoryLabel = categorySelect.options[categorySelect.selectedIndex]?.text;
+        const city = document.getElementById('vendRegCity').value;
+        const startingPrice = document.getElementById('vendRegStartingPrice').value.trim();
+        const pass = document.getElementById('vendRegPassword').value;
+        const confirmPass = document.getElementById('vendRegConfirmPassword').value;
+
+        if (!businessName || !ownerName || !email || !phone || !category || !pass) {
+          showAlert('vendorAlert', 'Please fill in all required fields.', 'danger');
+          return;
+        }
+
+        if (phone.replace(/[^0-9]/g, '').length < 10) {
+          showAlert('vendorAlert', 'Please enter a valid 10-digit mobile number.', 'danger');
+          return;
+        }
+
+        if (pass.length < 6) {
+          showAlert('vendorAlert', 'Password must be at least 6 characters long.', 'danger');
+          return;
+        }
+
+        if (pass !== confirmPass) {
+          showAlert('vendorAlert', 'Passwords do not match.', 'danger');
+          return;
+        }
+
+        const result = AuthManager.registerVendor({
+          businessName, ownerName, email, phone, category, categoryLabel, city, startingPrice, password: pass
+        });
+
+        if (result.success) {
+          showAlert('vendorAlert', 'Vendor registered successfully! Directing to dashboard...', 'success');
+          setTimeout(() => { window.location.href = result.redirect; }, 700);
+        } else {
+          showAlert('vendorAlert', result.message, 'danger');
+        }
+      });
+
+      // 11. Form Handlers: Admin Login
+      document.getElementById('adminLoginForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('adminEmail').value.trim();
+        const pass = document.getElementById('adminPassword').value;
+
+        const result = AuthManager.login('admin', email, pass);
+        if (result.success) {
+          showAlert('adminAlert', 'Admin credentials verified! Loading Admin Console...', 'success');
+          setTimeout(() => { window.location.href = result.redirect; }, 600);
+        } else {
+          showAlert('adminAlert', result.message, 'danger');
+        }
+      });
+
+      // 12. Forgot password demo alerts
+      document.querySelectorAll('.forgot-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          alert('Demo Notice: In this prototype, you can use the "Quick Demo Access" buttons above to instantly test login with preset credentials!');
+        });
+      });
+
+      function showAlert(containerId, message, type) {
+        const el = document.getElementById(containerId);
+        if (!el) return;
+        el.className = `auth-alert ${type}`;
+        el.textContent = message;
+        el.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
