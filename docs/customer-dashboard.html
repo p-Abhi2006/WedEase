@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WedEase | Customer Dashboard</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body">
+
+  <!-- Top Dashboard Navigation -->
+  <header class="dash-navbar">
+    <div class="container dash-nav-inner">
+      <a href="index.html" class="brand-logo" aria-label="WedEase Home">
+        <svg class="brand-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="16" r="9" stroke="currentColor" stroke-width="2.5" opacity="0.85"/>
+          <circle cx="20" cy="16" r="9" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M16 10L17.5 13L21 13.5L18.5 16L19 19.5L16 18L13 19.5L13.5 16L11 13.5L14.5 13L16 10Z" fill="currentColor"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">WedEase</span>
+          <span class="brand-tagline">Customer Planning Portal</span>
+        </div>
+      </a>
+
+      <div class="dash-user-controls">
+        <a href="index.html" class="btn btn-outline btn-sm">← Back to Main Website</a>
+        <div class="user-greeting-pill">
+          <span class="avatar-circle">💍</span>
+          <div class="user-info-text">
+            <span class="user-name-display" id="custNavName">Loading...</span>
+            <small class="user-role-badge">Customer</small>
+          </div>
+        </div>
+        <button type="button" class="btn btn-outline btn-sm" id="custLogoutBtn">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container dash-main">
+    
+    <!-- Welcome Header Banner -->
+    <div class="dash-hero-banner">
+      <div class="dash-hero-content">
+        <span class="dash-badge">💍 Your Wedding Planning Headquarters</span>
+        <h1 class="dash-title" id="welcomeHeading">Welcome, Ananya!</h1>
+        <p class="dash-subtitle" id="weddingDateSubtitle">
+          Wedding Celebration Date: <strong id="displayWeddingDate">December 18, 2026</strong> (Bangalore)
+        </p>
+      </div>
+      <div class="dash-quick-links">
+        <a href="index.html#services" class="btn btn-primary btn-sm">Browse Wedding Services</a>
+        <a href="index.html#packages" class="btn btn-outline btn-sm">Explore Packages</a>
+        <a href="index.html#builder" class="btn btn-gold btn-sm">Customize Package</a>
+      </div>
+    </div>
+
+    <!-- Metric Cards Grid -->
+    <div class="dash-metrics-grid">
+      <div class="dash-metric-card">
+        <span class="m-icon">💰</span>
+        <div class="m-details">
+          <span class="m-label">Target Budget</span>
+          <span class="m-val" id="metricBudget">₹8,00,000</span>
+        </div>
+      </div>
+
+      <div class="dash-metric-card">
+        <span class="m-icon">📦</span>
+        <div class="m-details">
+          <span class="m-label">Custom Package Value</span>
+          <span class="m-val" id="metricCustomPkg">₹0</span>
+        </div>
+      </div>
+
+      <div class="dash-metric-card">
+        <span class="m-icon">📋</span>
+        <div class="m-details">
+          <span class="m-label">Active Enquiries</span>
+          <span class="m-val" id="metricEnquiriesCount">0</span>
+        </div>
+      </div>
+
+      <div class="dash-metric-card">
+        <span class="m-icon">⏳</span>
+        <div class="m-details">
+          <span class="m-label">Countdown</span>
+          <span class="m-val" id="metricCountdown">Planned</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Tabs / Grid -->
+    <div class="dash-content-grid">
+      
+      <!-- Left Column (Enquiries & Custom Package) -->
+      <div class="dash-col-main">
+        
+        <!-- Section: My Booking Enquiries -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div>
+              <h2 class="card-title">My Booking Enquiries</h2>
+              <p class="card-desc">Track status and vendor responses for your wedding consultations.</p>
+            </div>
+            <a href="index.html#enquiry" class="btn btn-outline btn-sm">+ New Enquiry</a>
+          </div>
+
+          <div class="enquiries-table-wrap" id="enquiriesContainer">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Section: My Custom Package Summary -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div>
+              <h2 class="card-title">My Custom Package Setup</h2>
+              <p class="card-desc">The wedding components you selected in the interactive package builder.</p>
+            </div>
+            <a href="index.html#builder" class="btn btn-outline btn-sm">Modify In Builder ➔</a>
+          </div>
+
+          <div id="customPackageSummaryContainer">
+            <!-- Rendered dynamically from localStorage -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column (Profile & Budget Overview) -->
+      <div class="dash-col-side">
+        
+        <!-- Profile Card -->
+        <div class="dash-card">
+          <h2 class="card-title" style="margin-bottom: 1.25rem;">Celebration Details</h2>
+          <form id="custProfileForm" class="dash-profile-form">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" id="profName" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" id="profEmail" class="form-control" disabled style="opacity: 0.75;">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" id="profPhone" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Partner Name</label>
+              <input type="text" id="profPartner" class="form-control" placeholder="Partner's Name">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Wedding Date</label>
+              <input type="date" id="profDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Celebration City</label>
+              <select id="profCity" class="form-control">
+                <option value="Bangalore">Bangalore</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi NCR">Delhi NCR</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Kochi">Kochi</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-sm">Save Profile Changes</button>
+          </form>
+        </div>
+
+        <!-- Budget Quick Widget -->
+        <div class="dash-card">
+          <h2 class="card-title" style="margin-bottom: 0.5rem;">Budget Health</h2>
+          <p class="card-desc" style="margin-bottom: 1rem;">Overview from Smart Budget Estimator</p>
+
+          <div class="budget-mini-widget" id="budgetMiniWidget">
+            <!-- Injected via script -->
+          </div>
+
+          <a href="index.html#budget" class="btn btn-outline btn-block btn-sm" style="margin-top: 1rem;">
+            Open Full Budget Estimator ➔
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Enforce Role Guard
+      const session = AuthManager.requireRole('customer');
+      if (!session) return;
+
+      const customer = session.data;
+
+      // 2. Populate Header & Banner
+      document.getElementById('custNavName').textContent = customer.name;
+      document.getElementById('welcomeHeading').textContent = `Welcome, ${customer.name}!`;
+      document.getElementById('displayWeddingDate').textContent = customer.weddingDate || 'Date to be decided';
+      document.getElementById('weddingDateSubtitle').innerHTML = `
+        Celebration City: <strong>${customer.city || 'Pan-India'}</strong> &bull; Wedding Date: <strong>${customer.weddingDate || 'Not set'}</strong>
+      `;
+
+      // 3. Populate Profile Form
+      document.getElementById('profName').value = customer.name || '';
+      document.getElementById('profEmail').value = customer.email || '';
+      document.getElementById('profPhone').value = customer.phone || '';
+      document.getElementById('profPartner').value = customer.partnerName || '';
+      document.getElementById('profDate').value = customer.weddingDate || '';
+      if (customer.city) document.getElementById('profCity').value = customer.city;
+
+      // Save Profile Form
+      document.getElementById('custProfileForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const customers = AuthManager.getCustomers();
+        const me = customers.find(c => c.id === customer.id || c.email === customer.email);
+        if (me) {
+          me.name = document.getElementById('profName').value.trim();
+          me.phone = document.getElementById('profPhone').value.trim();
+          me.partnerName = document.getElementById('profPartner').value.trim();
+          me.weddingDate = document.getElementById('profDate').value;
+          me.city = document.getElementById('profCity').value;
+
+          AuthManager.saveCustomers(customers);
+          // Update current session
+          session.data = me;
+          localStorage.setItem('wedease_auth_session', JSON.stringify(session));
+
+          alert('Profile updated successfully!');
+          window.location.reload();
+        }
+      });
+
+      // 4. Render My Booking Enquiries
+      function renderEnquiries() {
+        const allBookings = AuthManager.getBookings();
+        // Filter bookings belonging to this customer
+        const myBookings = allBookings.filter(b => 
+          b.customerEmail?.toLowerCase() === customer.email.toLowerCase() ||
+          b.customerName?.toLowerCase() === customer.name.toLowerCase()
+        );
+
+        document.getElementById('metricEnquiriesCount').textContent = myBookings.length;
+
+        const container = document.getElementById('enquiriesContainer');
+        if (!container) return;
+
+        if (myBookings.length === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 2rem 1rem; color: var(--text-muted);">
+              <span style="font-size: 2.2rem; display: block; margin-bottom: 0.5rem;">💌</span>
+              <p>You haven't submitted any booking enquiries yet.</p>
+              <a href="index.html#enquiry" class="btn btn-primary btn-sm" style="margin-top: 0.75rem;">Submit an Enquiry</a>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = `
+          <div class="dash-table-wrap">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Ref ID</th>
+                  <th>Service / Vendor</th>
+                  <th>Event Date</th>
+                  <th>Estimate</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${myBookings.map(b => `
+                  <tr>
+                    <td><span class="ref-pill">${b.referenceCode || b.id}</span></td>
+                    <td>
+                      <strong>${b.serviceName}</strong><br>
+                      <small style="color: var(--text-light);">${b.vendorName}</small>
+                    </td>
+                    <td>${b.eventDate}</td>
+                    <td><strong>${b.totalAmount}</strong></td>
+                    <td>
+                      <span class="status-badge ${b.status?.toLowerCase()}">${b.status}</span>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // 5. Render Custom Package Summary
+      function renderCustomPackage() {
+        const container = document.getElementById('customPackageSummaryContainer');
+        if (!container) return;
+
+        let selectedIds = [];
+        try {
+          selectedIds = JSON.parse(localStorage.getItem('wedease_custom_package')) || [];
+        } catch (e) {}
+
+        const servicesMaster = [
+          { id: 'b1', title: 'Grand AC Convention Hall', price: 150000, icon: '🏛️' },
+          { id: 'b2', title: 'Multi-Cuisine Royal Catering', price: 220000, icon: '🍽️' },
+          { id: 'b3', title: 'Candid Photography & 4K Teaser', price: 85000, icon: '📸' },
+          { id: 'b4', title: 'Theme Floral Mandap & Stage', price: 95000, icon: '🌸' },
+          { id: 'b5', title: 'Bridal & Groom Luxury Makeup', price: 40000, icon: '💄' },
+          { id: 'b6', title: 'Decorated Luxury Wedding Car', price: 25000, icon: '🚘' },
+          { id: 'b7', title: 'On-Site Wedding Event Management', price: 60000, icon: '📋' },
+          { id: 'b8', title: 'Live Music, Dhol & DJ Setup', price: 45000, icon: '🎵' },
+          { id: 'b9', title: 'Pre-Wedding Shoot & Drone Flight', price: 35000, icon: '🚁' },
+          { id: 'b10', title: 'Invitations & Guest Hospitality', price: 20000, icon: '💌' }
+        ];
+
+        const myItems = servicesMaster.filter(s => selectedIds.includes(s.id));
+        const total = myItems.reduce((sum, item) => sum + item.price, 0);
+
+        document.getElementById('metricCustomPkg').textContent = `₹${total.toLocaleString('en-IN')}`;
+
+        if (myItems.length === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 1.5rem; color: var(--text-muted); background: var(--bg-subtle); border-radius: var(--radius-sm);">
+              <p>No custom components selected yet.</p>
+              <a href="index.html#builder" class="btn btn-outline btn-sm" style="margin-top: 0.5rem;">Launch Package Builder</a>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = `
+          <div class="custom-pkg-summary-list">
+            ${myItems.map(item => `
+              <div class="pkg-row">
+                <span>${item.icon} ${item.title}</span>
+                <span class="price">₹${item.price.toLocaleString('en-IN')}</span>
+              </div>
+            `).join('')}
+            <div class="pkg-total-row">
+              <strong>Total Estimated Package:</strong>
+              <strong style="color: var(--burgundy-deep); font-size: 1.2rem;">₹${total.toLocaleString('en-IN')}</strong>
+            </div>
+          </div>
+        `;
+      }
+
+      // 6. Render Budget Mini Widget
+      function renderBudgetWidget() {
+        const container = document.getElementById('budgetMiniWidget');
+        if (!container) return;
+
+        let planned = 800000;
+        let amounts = {};
+        try {
+          planned = Number(localStorage.getItem('wedease_planned_budget')) || 800000;
+          amounts = JSON.parse(localStorage.getItem('wedease_budget_amounts')) || {};
+        } catch (e) {}
+
+        const expenses = Object.values(amounts).reduce((s, v) => s + (Number(v) || 0), 0);
+        const balance = planned - expenses;
+
+        document.getElementById('metricBudget').textContent = `₹${planned.toLocaleString('en-IN')}`;
+
+        container.innerHTML = `
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+            <span>Planned Target:</span>
+            <strong>₹${planned.toLocaleString('en-IN')}</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+            <span>Estimated Outlay:</span>
+            <strong style="color: var(--primary-rose);">₹${expenses.toLocaleString('en-IN')}</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.85rem; font-size: 0.95rem; border-top: 1px solid var(--border-light); padding-top: 0.5rem;">
+            <span>Remaining Buffer:</span>
+            <strong style="color: ${balance >= 0 ? 'var(--success)' : 'var(--danger)'};">₹${balance.toLocaleString('en-IN')}</strong>
+          </div>
+        `;
+      }
+
+      // 7. Logout Handler
+      document.getElementById('custLogoutBtn')?.addEventListener('click', () => {
+        AuthManager.logout();
+      });
+
+      renderEnquiries();
+      renderCustomPackage();
+      renderBudgetWidget();
+    });
+  </script>
+</body>
+</html>
