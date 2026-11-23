@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WedEase - Centralized Wedding Planning and Service Booking Platform. Discover verified vendors, customize packages, estimate budgets, and manage bookings.">
+  <title>WedEase | Wedding Planning & Service Booking Platform</title>
+  
+  <!-- Google Fonts: Cormorant Garamond & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="site-header" id="top">
+    <div class="nav-container">
+      <a href="#home" class="brand-logo" aria-label="WedEase Home">
+        <svg class="brand-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="16" r="9" stroke="currentColor" stroke-width="2.5" opacity="0.85"/>
+          <circle cx="20" cy="16" r="9" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M16 10L17.5 13L21 13.5L18.5 16L19 19.5L16 18L13 19.5L13.5 16L11 13.5L14.5 13L16 10Z" fill="currentColor"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">WedEase</span>
+          <span class="brand-tagline">Wedding Planning Platform</span>
+        </div>
+      </a>
+
+      <!-- Desktop & Mobile Navigation Links -->
+      <nav class="nav-menu" id="navMenu" aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#packages" class="nav-link">Packages</a></li>
+          <li><a href="#builder" class="nav-link">Custom Builder</a></li>
+          <li><a href="#budget" class="nav-link">Budget Estimator</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-cta-wrapper" id="navAuthSection">
+          <!-- Auth Dropdown (populated/updated by auth.js) -->
+          <div class="auth-dropdown-wrapper" id="authDropdownWrapper">
+            <button type="button" class="btn btn-outline nav-auth-btn" id="authDropdownBtn" aria-expanded="false" aria-haspopup="true">
+              <span>👤 Login / Sign Up</span>
+              <span class="dropdown-arrow">▾</span>
+            </button>
+            <div class="auth-dropdown-menu" id="authDropdownMenu">
+              <a href="login.html?role=customer&action=login" class="dropdown-item">
+                <span class="drop-icon">💍</span>
+                <div>
+                  <strong>Customer Login</strong>
+                  <small>For couples & organizers</small>
+                </div>
+              </a>
+              <a href="login.html?role=vendor&action=login" class="dropdown-item">
+                <span class="drop-icon">🏢</span>
+                <div>
+                  <strong>Vendor Login</strong>
+                  <small>For wedding service partners</small>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="login.html?role=admin&action=login" class="dropdown-item admin-item">
+                <span class="drop-icon">🛡️</span>
+                <div>
+                  <strong>Admin Login</strong>
+                  <small>Platform control center</small>
+                </div>
+              </a>
+            </div>
+          </div>
+          <a href="#enquiry" class="btn btn-primary nav-cta">Book Enquiry</a>
+        </div>
+      </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <div class="hero-text-wrap">
+          <div class="hero-badge">
+            <span class="sparkle-icon">✨</span> Trusted Wedding Planning & Vendor Booking
+          </div>
+          <h1 class="hero-title">Plan Your Perfect Wedding with WedEase</h1>
+          <p class="hero-description">
+            Your centralized destination to discover premier marriage halls, gourmet caterers, candid photographers, and breathtaking decor. Customize packages, calculate realistic budgets, and book with complete confidence.
+          </p>
+          <div class="hero-actions">
+            <a href="#services" class="btn btn-primary btn-lg">Explore Services</a>
+            <a href="#packages" class="btn btn-outline btn-lg">Explore Packages</a>
+            <a href="#builder" class="btn btn-gold btn-lg">Build Custom Package</a>
+          </div>
+
+          <!-- Trust Badges & Metrics -->
+          <div class="hero-stats">
+            <div class="stat-card">
+              <span class="stat-number">500+</span>
+              <span class="stat-label">Verified Vendors</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <span class="stat-number">15,000+</span>
+              <span class="stat-label">Dream Weddings</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <span class="stat-number">4.9 / 5</span>
+              <span class="stat-label">Couple Satisfaction</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Price Transparency</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose WedEase Section -->
+    <section class="section why-choose-section" id="features">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">Excellence In Every Detail</span>
+          <h2 class="section-title">Why Couples Choose WedEase</h2>
+          <p class="section-desc">We simplify wedding planning by bringing India's finest wedding service providers into one elegant, transparent platform.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-box">🛡️</div>
+            <h3 class="feature-title">Verified Quality Vendors</h3>
+            <p class="feature-text">Every vendor undergoes strict portfolio evaluation, licensing validation, and customer rating reviews before being listed.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-box">💎</div>
+            <h3 class="feature-title">100% Transparent Pricing</h3>
+            <p class="feature-text">No hidden surprise charges. View sample starting prices, detailed service inclusions, and real-time package totals upfront.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-box">🎨</div>
+            <h3 class="feature-title">Customizable Packages</h3>
+            <p class="feature-text">Don't settle for rigid presets. Pick only the exact services you desire and build a tailored package that fits your unique vision.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-box">📊</div>
+            <h3 class="feature-title">Live Budget Calculator</h3>
+            <p class="feature-text">Stay financially stress-free with our interactive estimator that monitors planned budget vs. real costs with instant alerts.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Discovery & Vendor Showcase Section -->
+    <section class="section services-section" id="services">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">Curated Marketplace</span>
+          <h2 class="section-title">Explore Wedding Services & Top Vendors</h2>
+          <p class="section-desc">Browse through 7 essential wedding categories or filter by location to find the perfect match for your celebration.</p>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="service-controls">
+          <!-- Category Filter Pills -->
+          <div class="category-pills" id="categoryFilter" role="tablist" aria-label="Service Category Filters">
+            <button class="pill-btn active" data-category="all" role="tab" aria-selected="true">All Services</button>
+            <button class="pill-btn" data-category="venue" role="tab" aria-selected="false">Marriage Halls & Auditoriums</button>
+            <button class="pill-btn" data-category="catering" role="tab" aria-selected="false">Catering</button>
+            <button class="pill-btn" data-category="photography" role="tab" aria-selected="false">Photography & Videography</button>
+            <button class="pill-btn" data-category="decoration" role="tab" aria-selected="false">Decoration</button>
+            <button class="pill-btn" data-category="makeup" role="tab" aria-selected="false">Makeup & Beauty</button>
+            <button class="pill-btn" data-category="vehicle" role="tab" aria-selected="false">Vehicle Rental</button>
+            <button class="pill-btn" data-category="event-management" role="tab" aria-selected="false">Event Management</button>
+          </div>
+
+          <!-- Search and City Filter Bar -->
+          <div class="filter-search-bar">
+            <div class="search-input-wrap">
+              <span class="search-icon" aria-hidden="true">🔍</span>
+              <input type="text" id="vendorSearchInput" placeholder="Search vendor name, service, or keyword..." aria-label="Search vendors">
+            </div>
+            <div class="city-select-wrap">
+              <label for="cityFilterSelect" class="sr-only">Filter by City</label>
+              <select id="cityFilterSelect" aria-label="Filter by City">
+                <option value="all">All Cities (Pan-India)</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi NCR">Delhi NCR</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Kochi">Kochi</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Counter & Status -->
+        <div class="results-meta">
+          <span id="resultsCount">Showing all vendors</span>
+          <span class="active-filter-indicator" id="filterIndicator"></span>
+        </div>
+
+        <!-- Vendor Cards Grid -->
+        <div class="vendor-grid" id="vendorGrid">
+          <!-- Populated dynamically via script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Pre-Curated Wedding Packages Section -->
+    <section class="section packages-section" id="packages">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">Turnkey Wedding Solutions</span>
+          <h2 class="section-title">All-Inclusive Wedding Packages</h2>
+          <p class="section-desc">Carefully crafted packages balancing elegance, convenience, and value. Choose a tier or use it as a foundation for your custom package.</p>
+        </div>
+
+        <div class="packages-grid">
+          <!-- Package 1: Economical -->
+          <div class="package-card" data-package="economical">
+            <div class="package-tier-badge">Essential Value</div>
+            <h3 class="package-name">Economical Package</h3>
+            <p class="package-tagline">Ideal for intimate weddings and thoughtful celebrations up to 400 guests.</p>
+            <div class="package-price">
+              <span class="currency">₹</span>
+              <span class="amount">2,99,000</span>
+              <span class="period">Starting Estimate</span>
+            </div>
+            <ul class="package-features">
+              <li><span class="check-icon">✓</span> Traditional Marriage Hall / Banquet Hall</li>
+              <li><span class="check-icon">✓</span> Pure Veg / Non-Veg Buffet Catering (300 guests)</li>
+              <li><span class="check-icon">✓</span> Elegant Floral Stage & Entrance Arch Decor</li>
+              <li><span class="check-icon">✓</span> Full Day Candid Photography & High-Res Album</li>
+              <li><span class="check-icon">✓</span> Bridal Makeup & Hair Styling (Single Session)</li>
+              <li><span class="check-icon">✓</span> Standard Sound System & Background Music</li>
+            </ul>
+            <button class="btn btn-outline btn-block select-package-btn" data-package-name="Economical Package" data-package-price="299000">
+              Select Economical Package
+            </button>
+          </div>
+
+          <!-- Package 2: Standard (Featured) -->
+          <div class="package-card featured" data-package="standard">
+            <div class="popular-ribbon">Most Popular</div>
+            <div class="package-tier-badge gold">Classic Elegance</div>
+            <h3 class="package-name">Standard Package</h3>
+            <p class="package-tagline">Our most beloved complete package tailored for weddings up to 800 guests.</p>
+            <div class="package-price">
+              <span class="currency">₹</span>
+              <span class="amount">6,99,000</span>
+              <span class="period">Starting Estimate</span>
+            </div>
+            <ul class="package-features">
+              <li><span class="check-icon">✓</span> Premium Air-Conditioned Convention Center / Auditorium</li>
+              <li><span class="check-icon">✓</span> Multi-Cuisine Deluxe Catering (500 guests + Live Counters)</li>
+              <li><span class="check-icon">✓</span> Theme Floral Decor, Mandap, Stage, and LED Light Tunnel</li>
+              <li><span class="check-icon">✓</span> Candid Photography + Cinematic 4K Teaser & Video</li>
+              <li><span class="check-icon">✓</span> HD Drone Venue & Procession Coverage</li>
+              <li><span class="check-icon">✓</span> Bridal & Groom Luxury Styling (2 Sessions)</li>
+              <li><span class="check-icon">✓</span> Decorated Luxury Bridal Car (Audi / BMW sedan)</li>
+              <li><span class="check-icon">✓</span> Dedicated On-Site Event Coordinator on Wedding Day</li>
+            </ul>
+            <button class="btn btn-primary btn-block select-package-btn" data-package-name="Standard Package" data-package-price="699000">
+              Select Standard Package
+            </button>
+          </div>
+
+          <!-- Package 3: Premium -->
+          <div class="package-card" data-package="premium">
+            <div class="package-tier-badge">Royal Grandeur</div>
+            <h3 class="package-name">Premium Royal Package</h3>
+            <p class="package-tagline">Bespoke luxury experience for grand palace, destination, and heritage weddings.</p>
+            <div class="package-price">
+              <span class="currency">₹</span>
+              <span class="amount">14,99,000</span>
+              <span class="period">Starting Estimate</span>
+            </div>
+            <ul class="package-features">
+              <li><span class="check-icon">✓</span> 5-Star Heritage Palace / Luxury Resort Lawn Venue</li>
+              <li><span class="check-icon">✓</span> Gourmet 75+ Item Feast with Live International Food Stations</li>
+              <li><span class="check-icon">✓</span> Grand Designer Stage, Custom Mandap & Architectural Lighting</li>
+              <li><span class="check-icon">✓</span> 3-Day Photography + Pre-Wedding Video + 2 Drones + Coffee Table Book</li>
+              <li><span class="check-icon">✓</span> Celebrity Makeup Artist for Bride, Groom & Family</li>
+              <li><span class="check-icon">✓</span> Vintage Classic Car or Mercedes Fleet for Barat</li>
+              <li><span class="check-icon">✓</span> Live Celebrity DJ, Sufi Ensemble & Cultural Performances</li>
+              <li><span class="check-icon">✓</span> End-to-End VIP Wedding Concierge & Hospitality Team</li>
+            </ul>
+            <button class="btn btn-outline btn-block select-package-btn" data-package-name="Premium Royal Package" data-package-price="1499000">
+              Select Premium Package
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Custom Package Builder Section -->
+    <section class="section builder-section" id="builder">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">Tailor Every Element</span>
+          <h2 class="section-title">Interactive Custom Package Builder</h2>
+          <p class="section-desc">Select the exact services you need. The total package estimate updates instantly as you customize.</p>
+        </div>
+
+        <div class="builder-layout">
+          <!-- Left: Services Selection Grid -->
+          <div class="builder-services-panel">
+            <div class="panel-header">
+              <h3>Available Service Components</h3>
+              <span class="panel-instruction">Click on components to add or remove them from your custom package</span>
+            </div>
+
+            <div class="builder-items-grid" id="builderItemsGrid">
+              <!-- Rendered via script.js -->
+            </div>
+          </div>
+
+          <!-- Right: Live Package Summary Card -->
+          <div class="builder-summary-panel">
+            <div class="summary-card sticky-card">
+              <div class="summary-card-header">
+                <h3>Your Custom Package</h3>
+                <span class="items-count-badge" id="customSelectedCount">0 items selected</span>
+              </div>
+
+              <!-- Selected Items List -->
+              <div class="selected-items-list" id="selectedItemsList">
+                <div class="empty-state-notice">
+                  <span class="empty-icon">💍</span>
+                  <p>No services selected yet. Click any service on the left to start customizing your package!</p>
+                </div>
+              </div>
+
+              <div class="summary-divider"></div>
+
+              <!-- Pricing Breakdown -->
+              <div class="summary-totals">
+                <div class="subtotal-row">
+                  <span>Base Services Total:</span>
+                  <span class="subtotal-val" id="builderSubtotal">₹0</span>
+                </div>
+                <div class="subtotal-row">
+                  <span>Platform Coordination Fee:</span>
+                  <span class="discount-val">FREE (Demo)</span>
+                </div>
+                <div class="grand-total-row">
+                  <span class="total-label">Estimated Total:</span>
+                  <span class="grand-total-val" id="builderTotal">₹0</span>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="summary-actions">
+                <button type="button" class="btn btn-primary btn-block" id="transferToEnquiryBtn" disabled>
+                  Use in Booking Enquiry ➔
+                </button>
+                <button type="button" class="btn btn-link btn-block" id="resetBuilderBtn">
+                  Reset Selection
+                </button>
+              </div>
+
+              <p class="builder-note">
+                <small>* Estimates are based on standard guest counts (~500) and can be fine-tuned during consultation.</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Budget Estimator Section -->
+    <section class="section budget-section" id="budget">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">Financial Peace of Mind</span>
+          <h2 class="section-title">Smart Wedding Budget Estimator</h2>
+          <p class="section-desc">Plan your wedding budget effortlessly. Enter your target budget, adjust categories, and get real-time alerts.</p>
+        </div>
+
+        <div class="budget-card">
+          <!-- Step 1: Input Planned Budget -->
+          <div class="budget-input-header">
+            <div class="budget-field-group">
+              <label for="plannedBudgetInput" class="budget-label">Enter Your Target Budget (₹ INR):</label>
+              <div class="currency-input-wrap">
+                <span class="currency-symbol">₹</span>
+                <input type="number" id="plannedBudgetInput" min="50000" step="10000" value="800000" placeholder="e.g. 800000">
+              </div>
+            </div>
+
+            <!-- Quick Budget Preset Buttons -->
+            <div class="budget-presets">
+              <span class="presets-label">Quick Presets:</span>
+              <button type="button" class="preset-btn" data-preset="500000">₹5 Lakh</button>
+              <button type="button" class="preset-btn active" data-preset="800000">₹8 Lakh</button>
+              <button type="button" class="preset-btn" data-preset="1200000">₹12 Lakh</button>
+              <button type="button" class="preset-btn" data-preset="2000000">₹20 Lakh</button>
+              <button type="button" class="preset-btn" data-preset="3500000">₹35 Lakh</button>
+            </div>
+          </div>
+
+          <!-- Visual Progress & Status Alert -->
+          <div class="budget-health-meter">
+            <div class="meter-labels">
+              <span>Budget Utilization</span>
+              <span id="budgetPercentLabel">0%</span>
+            </div>
+            <div class="progress-bar-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar-fill" id="budgetProgressFill" style="width: 0%;"></div>
+            </div>
+            <div class="budget-status-alert" id="budgetStatusAlert">
+              <!-- Updated via script.js -->
+            </div>
+          </div>
+
+          <!-- Financial Summary Cards -->
+          <div class="budget-metrics-grid">
+            <div class="metric-box">
+              <span class="metric-label">Planned Budget</span>
+              <span class="metric-value" id="displayPlannedBudget">₹8,00,000</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Estimated Expenses</span>
+              <span class="metric-value expense" id="displayEstimatedExpenses">₹0</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Remaining Balance</span>
+              <span class="metric-value balance" id="displayRemainingBalance">₹8,00,000</span>
+            </div>
+          </div>
+
+          <!-- Category Allocator Table -->
+          <div class="budget-categories-panel">
+            <div class="panel-headline">
+              <h3>Category-Wise Expense Breakdown</h3>
+              <p>Toggle or customize expenses across standard wedding categories:</p>
+            </div>
+
+            <div class="budget-rows-container" id="budgetRowsContainer">
+              <!-- Rendered via script.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking Enquiry Section -->
+    <section class="section enquiry-section" id="enquiry">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">Take The First Step</span>
+          <h2 class="section-title">Submit a Booking Enquiry</h2>
+          <p class="section-desc">Let us know what you envision for your big day. Our team will verify dates, negotiate best vendor quotes, and schedule consultations.</p>
+        </div>
+
+        <div class="enquiry-card">
+          <!-- Prototype Demo Notice Banner -->
+          <div class="demo-notice-banner" role="alert">
+            <span class="notice-icon">ℹ️</span>
+            <div class="notice-text">
+              <strong>Interactive Prototype Demo:</strong> Submitting this form tests client-side validation and generates a simulated enquiry reference token. It will not process payments or make live bookings.
+            </div>
+          </div>
+
+          <!-- Enquiry Form -->
+          <form id="bookingEnquiryForm" novalidate>
+            <div class="form-grid">
+              <!-- Full Name -->
+              <div class="form-group">
+                <label for="custName" class="form-label">Full Name <span class="required">*</span></label>
+                <input type="text" id="custName" name="custName" class="form-control" placeholder="e.g. Ananya Sharma & Rohit Verma" required>
+                <div class="invalid-feedback" id="nameError">Please enter your full name.</div>
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <label for="custEmail" class="form-label">Email Address <span class="required">*</span></label>
+                <input type="email" id="custEmail" name="custEmail" class="form-control" placeholder="e.g. ananya.wedding@example.com" required>
+                <div class="invalid-feedback" id="emailError">Please enter a valid email address.</div>
+              </div>
+
+              <!-- Phone Number -->
+              <div class="form-group">
+                <label for="custPhone" class="form-label">Phone Number (10 digits) <span class="required">*</span></label>
+                <input type="tel" id="custPhone" name="custPhone" class="form-control" placeholder="e.g. 9876543210" pattern="[0-9]{10}" required>
+                <div class="invalid-feedback" id="phoneError">Please enter a valid 10-digit mobile number.</div>
+              </div>
+
+              <!-- Wedding Date -->
+              <div class="form-group">
+                <label for="weddingDate" class="form-label">Tentative Wedding Date <span class="required">*</span></label>
+                <input type="date" id="weddingDate" name="weddingDate" class="form-control" required>
+                <div class="invalid-feedback" id="dateError">Please choose a valid wedding date.</div>
+              </div>
+
+              <!-- Event City / Location -->
+              <div class="form-group">
+                <label for="eventLocation" class="form-label">Celebration City / Venue <span class="required">*</span></label>
+                <select id="eventLocation" name="eventLocation" class="form-control" required>
+                  <option value="">Select city...</option>
+                  <option value="Bangalore">Bangalore</option>
+                  <option value="Mumbai">Mumbai</option>
+                  <option value="Delhi NCR">Delhi NCR</option>
+                  <option value="Jaipur / Udaipur (Destination)">Jaipur / Udaipur (Destination)</option>
+                  <option value="Hyderabad">Hyderabad</option>
+                  <option value="Chennai">Chennai</option>
+                  <option value="Kolkata">Kolkata</option>
+                  <option value="Kochi / Kerala">Kochi / Kerala</option>
+                  <option value="Goa (Beach Destination)">Goa (Beach Destination)</option>
+                  <option value="Other">Other City</option>
+                </select>
+                <div class="invalid-feedback" id="locationError">Please select an event city.</div>
+              </div>
+
+              <!-- Selected Package or Service -->
+              <div class="form-group">
+                <label for="selectedPackageOrService" class="form-label">Chosen Package or Service <span class="required">*</span></label>
+                <select id="selectedPackageOrService" name="selectedPackageOrService" class="form-control" required>
+                  <option value="">Select package or service...</option>
+                  <optgroup label="Curated Packages">
+                    <option value="Economical Package (₹2,99,000)">Economical Package (₹2,99,000)</option>
+                    <option value="Standard Package (₹6,99,000)">Standard Package (₹6,99,000)</option>
+                    <option value="Premium Royal Package (₹14,99,000)">Premium Royal Package (₹14,99,000)</option>
+                  </optgroup>
+                  <optgroup label="Custom / Individual Services">
+                    <option value="Custom Built Package (From Builder)">Custom Built Package (From Builder)</option>
+                    <option value="Marriage Hall & Auditorium Only">Marriage Hall & Auditorium Only</option>
+                    <option value="Catering & Feast Only">Catering & Feast Only</option>
+                    <option value="Photography & Cinematography Only">Photography & Cinematography Only</option>
+                    <option value="Floral & Stage Decoration Only">Floral & Stage Decoration Only</option>
+                    <option value="Bridal & Groom Makeup Only">Bridal & Groom Makeup Only</option>
+                    <option value="Full Wedding Event Management">Full Wedding Event Management</option>
+                  </optgroup>
+                </select>
+                <div class="invalid-feedback" id="serviceError">Please select a package or service.</div>
+              </div>
+
+              <!-- Estimated Guest Count -->
+              <div class="form-group">
+                <label for="guestCount" class="form-label">Approximate Guest Count</label>
+                <select id="guestCount" name="guestCount" class="form-control">
+                  <option value="Intimate (Under 200 guests)">Intimate (Under 200 guests)</option>
+                  <option value="Classic (200 - 500 guests)" selected>Classic (200 - 500 guests)</option>
+                  <option value="Grand (500 - 1000 guests)">Grand (500 - 1000 guests)</option>
+                  <option value="Royal / Mega (1000+ guests)">Royal / Mega (1000+ guests)</option>
+                </select>
+              </div>
+
+              <!-- Estimated Budget Range -->
+              <div class="form-group">
+                <label for="approxBudget" class="form-label">Target Budget Range</label>
+                <select id="approxBudget" name="approxBudget" class="form-control">
+                  <option value="Under ₹5 Lakhs">Under ₹5 Lakhs</option>
+                  <option value="₹5 Lakhs - ₹10 Lakhs" selected>₹5 Lakhs - ₹10 Lakhs</option>
+                  <option value="₹10 Lakhs - ₹20 Lakhs">₹10 Lakhs - ₹20 Lakhs</option>
+                  <option value="₹20 Lakhs - ₹40 Lakhs">₹20 Lakhs - ₹40 Lakhs</option>
+                  <option value="Above ₹40 Lakhs (Luxury)">Above ₹40 Lakhs (Luxury)</option>
+                </select>
+              </div>
+
+              <!-- Additional Requirements / Notes -->
+              <div class="form-group full-width">
+                <label for="specialNotes" class="form-label">Special Requirements or Custom Inclusions</label>
+                <textarea id="specialNotes" name="specialNotes" rows="4" class="form-control" placeholder="Tell us about specific theme preferences, dietary cuisines, favorite photography styles, or questions..."></textarea>
+              </div>
+            </div>
+
+            <!-- Submit Button & Feedback -->
+            <div class="form-actions text-center">
+              <button type="submit" class="btn btn-primary btn-lg submit-enquiry-btn" id="submitEnquiryBtn">
+                <span class="btn-text">Send Booking Enquiry</span>
+                <span class="btn-spinner" aria-hidden="true" style="display: none;">⏳</span>
+              </button>
+              <p class="form-disclaimer">
+                <small>🔒 Your information is completely safe with WedEase. We never share contacts with unapproved third parties.</small>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- About WedEase Section -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image-wrap">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" alt="Beautiful wedding mandap and floral setup" class="about-img" loading="lazy">
+            <div class="about-experience-badge">
+              <span class="exp-number">100%</span>
+              <span class="exp-text">Dedicated to Making Dream Weddings Stress-Free</span>
+            </div>
+          </div>
+          <div class="about-text-wrap">
+            <span class="section-subtitle">Our Purpose</span>
+            <h2 class="section-title">About WedEase</h2>
+            <p class="about-lead">
+              WedEase was born out of a simple observation: planning an Indian wedding is magical, but organizing it with disconnected vendors and hidden charges can be exhausting.
+            </p>
+            <p class="about-body">
+              WedEase centralizes every step of wedding planning into a cohesive platform. From discovering verified marriage halls and top-rated caterers to dynamically testing packages against your financial budget, we give couples clarity and peace of mind.
+            </p>
+            
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <span class="hl-icon">✓</span>
+                <div>
+                  <strong>End-to-End Service Ecosystem</strong>
+                  <p>Catering, venues, photography, styling, music, and fleet rental under one roof.</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <span class="hl-icon">✓</span>
+                <div>
+                  <strong>No Pressure, Direct Transparency</strong>
+                  <p>Upfront pricing and custom builders so you only book what you truly love.</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <span class="hl-icon">✓</span>
+                <div>
+                  <strong>Student College Project Innovation</strong>
+                  <p>Developed with modern web engineering standards, scalable REST architecture, and responsive UX.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & FAQ Section -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">Get In Touch</span>
+          <h2 class="section-title">Contact & Wedding FAQs</h2>
+          <p class="section-desc">Have questions about packages or vendor partnerships? Reach out to our concierge team anytime.</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Cards -->
+          <div class="contact-cards-col">
+            <div class="contact-info-card">
+              <div class="c-icon">📞</div>
+              <h4>Call or WhatsApp</h4>
+              <p>Mon - Sat, 9:00 AM - 8:00 PM IST</p>
+              <a href="tel:+919876543210" class="c-link">+91 98765 43210</a>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="c-icon">✉️</div>
+              <h4>Email Support</h4>
+              <p>For custom enquiries and partner onboarding</p>
+              <a href="mailto:support@wedease.example.com" class="c-link">support@wedease.example.com</a>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="c-icon">📍</div>
+              <h4>Headquarters</h4>
+              <p>WedEase Tech Hub, 4th Floor, Indiranagar, Bangalore, Karnataka 560038</p>
+            </div>
+          </div>
+
+          <!-- FAQ Accordion -->
+          <div class="faq-accordion-col">
+            <div class="faq-accordion">
+              <details class="faq-item" open>
+                <summary class="faq-question">
+                  <span>How does WedEase verify vendors?</span>
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </summary>
+                <div class="faq-answer">
+                  <p>Every wedding vendor listed on WedEase undergoes a strict 4-step verification: business credentials validation, on-site quality inspection, past client feedback checks, and price stability agreement.</p>
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary class="faq-question">
+                  <span>Can I customize the pre-designed packages?</span>
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </summary>
+                <div class="faq-answer">
+                  <p>Yes, absolutely! You can choose any base package and use our Custom Package Builder to add extra catering live counters, upgrade photography to 4K cinematic film, or remove items you don't need.</p>
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary class="faq-question">
+                  <span>How does the Budget Estimator work?</span>
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </summary>
+                <div class="faq-answer">
+                  <p>The Budget Estimator tracks your target budget in INR against standard and custom category expenses. It provides a visual progress meter and immediate warnings if you exceed your planned allocation.</p>
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary class="faq-question">
+                  <span>Does submitting an enquiry charge my card?</span>
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </summary>
+                <div class="faq-answer">
+                  <p>No. In this prototype MVP, the enquiry generates a consultation reference ID. Even in production, enquiries are completely free and non-binding until you sign an agreement with the vendor.</p>
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary class="faq-question">
+                  <span>Is WedEase available across all cities in India?</span>
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </summary>
+                <div class="faq-answer">
+                  <p>We currently showcase curated vendors in Bangalore, Mumbai, Delhi NCR, Jaipur, Hyderabad, Chennai, Kolkata, and Kochi, with destination wedding capabilities in Goa and Rajasthan.</p>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-col brand-col">
+        <a href="#home" class="brand-logo footer-logo">
+          <svg class="brand-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="16" r="9" stroke="currentColor" stroke-width="2.5" opacity="0.85"/>
+            <circle cx="20" cy="16" r="9" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M16 10L17.5 13L21 13.5L18.5 16L19 19.5L16 18L13 19.5L13.5 16L11 13.5L14.5 13L16 10Z" fill="currentColor"/>
+          </svg>
+          <div class="brand-text">
+            <span class="brand-name">WedEase</span>
+            <span class="brand-tagline">Wedding Planning Platform</span>
+          </div>
+        </a>
+        <p class="footer-desc">
+          Simplifying wedding celebrations with elegance, transparent budgets, and handpicked wedding vendors across India.
+        </p>
+        <div class="social-links">
+          <a href="#top" aria-label="WedEase on Instagram" class="social-icon">📷</a>
+          <a href="#top" aria-label="WedEase on Pinterest" class="social-icon">📌</a>
+          <a href="#top" aria-label="WedEase on YouTube" class="social-icon">▶️</a>
+          <a href="#top" aria-label="WedEase on LinkedIn" class="social-icon">💼</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Services</h4>
+        <ul class="footer-links">
+          <li><a href="#services" data-filter="venue">Marriage Halls & Auditoriums</a></li>
+          <li><a href="#services" data-filter="catering">Wedding Catering</a></li>
+          <li><a href="#services" data-filter="photography">Photography & Films</a></li>
+          <li><a href="#services" data-filter="decoration">Theme & Stage Decor</a></li>
+          <li><a href="#services" data-filter="makeup">Bridal Makeup</a></li>
+          <li><a href="#services" data-filter="vehicle">Luxury Car Rental</a></li>
+          <li><a href="#services" data-filter="event-management">Event Management</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Platform</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#packages">Curated Packages</a></li>
+          <li><a href="#builder">Custom Package Builder</a></li>
+          <li><a href="#budget">Smart Budget Estimator</a></li>
+          <li><a href="#enquiry">Book an Enquiry</a></li>
+          <li><a href="#about">About WedEase</a></li>
+          <li><a href="#contact">Contact & FAQs</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">College Project Info</h4>
+        <p class="footer-text">
+          <strong>WedEase MVP</strong><br>
+          Tech Stack: HTML5, CSS3, JavaScript.<br>
+          Backend Ready: Django & DRF.<br>
+          GitHub Pages Deployment: <code>/docs</code> folder.
+        </p>
+        <div class="footer-badge">Prototype Release v1.0</div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2026 WedEase – Wedding Planning and Service Booking Platform. All rights reserved.</p>
+        <p class="footer-subtext">Designed for effortless celebration planning.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal 1: Vendor Details Modal (Native Dialog with closedby="any" and light-dismiss fallback) -->
+  <dialog id="vendorModal" class="app-modal" closedby="any" aria-labelledby="vendorModalTitle">
+    <div class="modal-inner">
+      <button type="button" class="modal-close-btn" id="closeVendorModalBtn" aria-label="Close vendor details">&times;</button>
+      <div id="vendorModalBody">
+        <!-- Rendered dynamically via script.js -->
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal 2: Booking Enquiry Success Confirmation Modal -->
+  <dialog id="enquirySuccessModal" class="app-modal" closedby="any" aria-labelledby="enquirySuccessModalTitle">
+    <div class="modal-inner success-modal-inner">
+      <button type="button" class="modal-close-btn" id="closeSuccessModalBtn" aria-label="Close confirmation">&times;</button>
+      <div class="success-icon-wrap">🎉</div>
+      <h2 id="enquirySuccessModalTitle" class="success-title">Enquiry Submitted Successfully!</h2>
+      <p class="success-subtitle">Thank you for submitting your wedding celebration enquiry with WedEase.</p>
+      
+      <div class="enquiry-receipt" id="enquiryReceiptContent">
+        <!-- Injected via script.js -->
+      </div>
+
+      <div class="modal-actions text-center">
+        <button type="button" class="btn btn-primary" id="successOkBtn">Back to Planning</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Floating Toast Notification -->
+  <div id="toastNotification" class="toast-notification" role="status" aria-live="polite"></div>
+
+  <!-- JavaScript -->
+  <script src="auth.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
