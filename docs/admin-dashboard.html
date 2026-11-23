@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WedEase | Platform Admin Console</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body admin-body">
+
+  <!-- Admin Top Navigation -->
+  <header class="dash-navbar admin-navbar">
+    <div class="container dash-nav-inner">
+      <a href="index.html" class="brand-logo" aria-label="WedEase Home">
+        <svg class="brand-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="16" r="9" stroke="currentColor" stroke-width="2.5" opacity="0.85"/>
+          <circle cx="20" cy="16" r="9" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M16 10L17.5 13L21 13.5L18.5 16L19 19.5L16 18L13 19.5L13.5 16L11 13.5L14.5 13L16 10Z" fill="currentColor"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">WedEase</span>
+          <span class="brand-tagline">Super Admin Console</span>
+        </div>
+      </a>
+
+      <div class="dash-user-controls">
+        <a href="index.html" class="btn btn-outline btn-sm">← Main Website</a>
+        <div class="user-greeting-pill">
+          <span class="avatar-circle">🛡️</span>
+          <div class="user-info-text">
+            <span class="user-name-display">System Administrator</span>
+            <small class="user-role-badge admin">Super Admin</small>
+          </div>
+        </div>
+        <button type="button" class="btn btn-outline btn-sm" id="adminLogoutBtn">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container dash-main">
+    
+    <!-- Admin Hero Banner -->
+    <div class="dash-hero-banner admin-hero">
+      <div class="dash-hero-content">
+        <span class="dash-badge">🛡️ Platform Administration & Operations</span>
+        <h1 class="dash-title">WedEase Central Management System</h1>
+        <p class="dash-subtitle">
+          Monitor platform metrics, manage registered couples, approve vendor applications, and maintain service packages.
+        </p>
+      </div>
+    </div>
+
+    <!-- Admin Overview Metric Cards -->
+    <div class="dash-metrics-grid">
+      <div class="dash-metric-card">
+        <span class="m-icon">👥</span>
+        <div class="m-details">
+          <span class="m-label">Registered Customers</span>
+          <span class="m-val" id="adminCountCustomers">0</span>
+        </div>
+      </div>
+
+      <div class="dash-metric-card">
+        <span class="m-icon">🏢</span>
+        <div class="m-details">
+          <span class="m-label">Partner Vendors</span>
+          <span class="m-val" id="adminCountVendors">0</span>
+        </div>
+      </div>
+
+      <div class="dash-metric-card">
+        <span class="m-icon">⏳</span>
+        <div class="m-details">
+          <span class="m-label">Pending Vendor Approvals</span>
+          <span class="m-val" id="adminCountPendingVendors" style="color: var(--warning);">0</span>
+        </div>
+      </div>
+
+      <div class="dash-metric-card">
+        <span class="m-icon">📋</span>
+        <div class="m-details">
+          <span class="m-label">Total Booking Enquiries</span>
+          <span class="m-val" id="adminCountBookings">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs for Modules -->
+    <div class="admin-module-tabs" role="tablist">
+      <button type="button" class="admin-tab-btn active" data-target="panelOverview">📊 Overview</button>
+      <button type="button" class="admin-tab-btn" data-target="panelCustomers">👥 Customer Management</button>
+      <button type="button" class="admin-tab-btn" data-target="panelVendors">🏢 Vendor Management</button>
+      <button type="button" class="admin-tab-btn" data-target="panelServices">🏷️ Service Categories</button>
+      <button type="button" class="admin-tab-btn" data-target="panelPackages">📦 Package Management</button>
+      <button type="button" class="admin-tab-btn" data-target="panelBookings">📋 All Bookings</button>
+    </div>
+
+    <!-- Module Panels Container -->
+    <div class="admin-panels-container">
+
+      <!-- ==============================================
+           PANEL 1: OVERVIEW & RECENT ACTIVITY
+           ============================================== -->
+      <div class="admin-panel active" id="panelOverview">
+        <div class="dash-card">
+          <h2 class="card-title">Recent System Activity</h2>
+          <p class="card-desc">Audit log of recent user registrations, vendor submissions, and booking requests.</p>
+          <div class="admin-activity-list" id="recentActivityList">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           PANEL 2: CUSTOMER MANAGEMENT
+           ============================================== -->
+      <div class="admin-panel" id="panelCustomers" style="display: none;">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div>
+              <h2 class="card-title">Registered Customers</h2>
+              <p class="card-desc">View customer profiles, planned celebration dates, and manage account statuses.</p>
+            </div>
+          </div>
+          <div class="dash-table-wrap" id="customersTableWrap">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           PANEL 3: VENDOR MANAGEMENT & APPROVALS
+           ============================================== -->
+      <div class="admin-panel" id="panelVendors" style="display: none;">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div>
+              <h2 class="card-title">Vendor Registrations & Moderation</h2>
+              <p class="card-desc">Review vendor credentials and approve or reject partner onboarding.</p>
+            </div>
+            <div class="status-filter-pills">
+              <button type="button" class="pill-btn active btn-sm" id="vendorFilterAll">All</button>
+              <button type="button" class="pill-btn btn-sm" id="vendorFilterPending">Pending Approvals</button>
+              <button type="button" class="pill-btn btn-sm" id="vendorFilterApproved">Approved</button>
+            </div>
+          </div>
+          <div class="dash-table-wrap" id="vendorsTableWrap">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           PANEL 4: SERVICE CATEGORY MANAGEMENT
+           ============================================== -->
+      <div class="admin-panel" id="panelServices" style="display: none;">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div>
+              <h2 class="card-title">Service Categories</h2>
+              <p class="card-desc">Manage the primary wedding service categories displayed across the marketplace.</p>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" id="openAddCategoryBtn">+ Add Category</button>
+          </div>
+          <div id="categoriesListWrap">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           PANEL 5: PACKAGE MANAGEMENT
+           ============================================== -->
+      <div class="admin-panel" id="panelPackages" style="display: none;">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div>
+              <h2 class="card-title">Turnkey Wedding Package Management</h2>
+              <p class="card-desc">Adjust baseline pricing and visibility for platform pre-curated tiers.</p>
+            </div>
+          </div>
+          <div id="packagesManagerWrap">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           PANEL 6: BOOKING MANAGEMENT
+           ============================================== -->
+      <div class="admin-panel" id="panelBookings" style="display: none;">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div>
+              <h2 class="card-title">Platform-Wide Booking Enquiries</h2>
+              <p class="card-desc">Audit all client requests, monitor status, and resolve issues.</p>
+            </div>
+          </div>
+          <div class="dash-table-wrap" id="adminBookingsTableWrap">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Add Category Modal -->
+  <dialog id="addCategoryModal" class="app-modal" closedby="any" aria-labelledby="addCatModalTitle">
+    <div class="modal-inner">
+      <button type="button" class="modal-close-btn" id="closeCatModalBtn" aria-label="Close modal">&times;</button>
+      <h3 id="addCatModalTitle" class="card-title" style="margin-bottom: 1rem;">Add New Service Category</h3>
+      <form id="addCategoryForm">
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label">Category Name</label>
+          <input type="text" id="newCatName" class="form-control" placeholder="e.g. Honeymoon & Travel Planners" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label">Icon Emoji</label>
+          <input type="text" id="newCatIcon" class="form-control" placeholder="✈️" value="✨">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Create Category</button>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Enforce Super Admin Role Guard
+      const session = AuthManager.requireRole('admin');
+      if (!session) return;
+
+      // 2. Tab Navigation
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.admin-panel').forEach(p => p.style.display = 'none');
+
+          btn.classList.add('active');
+          const targetId = btn.getAttribute('data-target');
+          const targetPanel = document.getElementById(targetId);
+          if (targetPanel) {
+            targetPanel.style.display = 'block';
+          }
+        });
+      });
+
+      // 3. Update Counts
+      function updateMetrics() {
+        const customers = AuthManager.getCustomers();
+        const vendors = AuthManager.getVendors();
+        const bookings = AuthManager.getBookings();
+
+        document.getElementById('adminCountCustomers').textContent = customers.length;
+        document.getElementById('adminCountVendors').textContent = vendors.length;
+        document.getElementById('adminCountPendingVendors').textContent = vendors.filter(v => v.status === 'pending').length;
+        document.getElementById('adminCountBookings').textContent = bookings.length;
+      }
+
+      // 4. Panel 1: Activity Overview
+      function renderOverview() {
+        const bookings = AuthManager.getBookings().slice(0, 5);
+        const vendors = AuthManager.getVendors();
+        const pending = vendors.filter(v => v.status === 'pending');
+
+        const container = document.getElementById('recentActivityList');
+        if (!container) return;
+
+        container.innerHTML = `
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            ${pending.length > 0 ? `
+              <div style="background: var(--warning-bg); border-left: 4px solid var(--warning); padding: 1rem; border-radius: var(--radius-sm);">
+                <strong>⚠️ Pending Approval Alert:</strong> ${pending.length} vendor application(s) awaiting your review.
+              </div>
+            ` : `
+              <div style="background: var(--success-bg); border-left: 4px solid var(--success); padding: 1rem; border-radius: var(--radius-sm);">
+                <strong>✓ All Clear:</strong> No pending vendor approvals waiting.
+              </div>
+            `}
+
+            <h3 style="font-family: var(--font-serif); font-size: 1.3rem; margin-top: 1rem; color: var(--burgundy-deep);">Recent Platform Enquiries</h3>
+            ${bookings.map(b => `
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem; background: var(--bg-subtle); border-radius: var(--radius-sm); border: 1px solid var(--border-light);">
+                <div>
+                  <strong>${b.customerName}</strong> enquiring for <strong>${b.serviceName}</strong> (${b.vendorName})
+                  <div style="font-size: 0.8rem; color: var(--text-light);">${b.location} &bull; ${b.eventDate}</div>
+                </div>
+                <div>
+                  <span class="status-badge ${b.status?.toLowerCase()}">${b.status}</span>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      // 5. Panel 2: Customer Management
+      function renderCustomers() {
+        const customers = AuthManager.getCustomers();
+        const wrap = document.getElementById('customersTableWrap');
+        if (!wrap) return;
+
+        wrap.innerHTML = `
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Customer Name</th>
+                <th>Contact</th>
+                <th>Wedding Date</th>
+                <th>City</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${customers.map(c => `
+                <tr>
+                  <td><strong>${c.name}</strong><br><small style="color: var(--text-light);">Partner: ${c.partnerName || 'N/A'}</small></td>
+                  <td>${c.email}<br><small style="color: var(--text-muted);">${c.phone}</small></td>
+                  <td>${c.weddingDate || 'Not specified'}</td>
+                  <td>${c.city || 'Bangalore'}</td>
+                  <td>
+                    <span class="status-badge ${c.active ? 'confirmed' : 'rejected'}">
+                      ${c.active ? 'Active' : 'Deactivated'}
+                    </span>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-outline btn-sm toggle-cust-btn" data-id="${c.id}">
+                      ${c.active ? 'Deactivate' : 'Activate'}
+                    </button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+
+        document.querySelectorAll('.toggle-cust-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            AuthManager.toggleCustomerActive(id);
+            updateMetrics();
+            renderCustomers();
+          });
+        });
+      }
+
+      // 6. Panel 3: Vendor Management
+      let vendorFilter = 'all';
+
+      function renderVendors() {
+        const vendors = AuthManager.getVendors();
+        const wrap = document.getElementById('vendorsTableWrap');
+        if (!wrap) return;
+
+        const filtered = vendors.filter(v => {
+          if (vendorFilter === 'pending') return v.status === 'pending';
+          if (vendorFilter === 'approved') return v.status === 'approved';
+          return true;
+        });
+
+        wrap.innerHTML = `
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Business Name</th>
+                <th>Category</th>
+                <th>Contact Person</th>
+                <th>City & Rate</th>
+                <th>Approval Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filtered.map(v => `
+                <tr>
+                  <td><strong>${v.businessName}</strong></td>
+                  <td><span class="ref-pill">${v.categoryLabel || v.category}</span></td>
+                  <td>${v.ownerName}<br><small style="color: var(--text-muted);">${v.email} &bull; ${v.phone}</small></td>
+                  <td>${v.city}<br><small style="color: var(--gold-hover);">${v.startingPrice}</small></td>
+                  <td>
+                    <span class="status-badge ${v.status === 'approved' ? 'confirmed' : v.status === 'pending' ? 'pending' : 'rejected'}">
+                      ${v.status.toUpperCase()}
+                    </span>
+                  </td>
+                  <td>
+                    <div class="action-btn-group">
+                      ${v.status !== 'approved' ? `
+                        <button type="button" class="btn btn-sm btn-accept approve-vendor-btn" data-id="${v.id}">Approve</button>
+                      ` : ''}
+                      ${v.status !== 'rejected' ? `
+                        <button type="button" class="btn btn-sm btn-reject reject-vendor-btn" data-id="${v.id}">Reject</button>
+                      ` : ''}
+                    </div>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+
+        document.querySelectorAll('.approve-vendor-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            AuthManager.setVendorApproval(id, 'approved');
+            updateMetrics();
+            renderVendors();
+            renderOverview();
+          });
+        });
+
+        document.querySelectorAll('.reject-vendor-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            AuthManager.setVendorApproval(id, 'rejected');
+            updateMetrics();
+            renderVendors();
+            renderOverview();
+          });
+        });
+      }
+
+      document.getElementById('vendorFilterAll')?.addEventListener('click', (e) => {
+        setVendorFilterBtn(e.target, 'all');
+      });
+      document.getElementById('vendorFilterPending')?.addEventListener('click', (e) => {
+        setVendorFilterBtn(e.target, 'pending');
+      });
+      document.getElementById('vendorFilterApproved')?.addEventListener('click', (e) => {
+        setVendorFilterBtn(e.target, 'approved');
+      });
+
+      function setVendorFilterBtn(btn, filter) {
+        document.querySelectorAll('#panelVendors .pill-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        vendorFilter = filter;
+        renderVendors();
+      }
+
+      // 7. Panel 4: Service Categories
+      function renderCategories() {
+        const categories = AuthManager.getCategories();
+        const wrap = document.getElementById('categoriesListWrap');
+        if (!wrap) return;
+
+        wrap.innerHTML = `
+          <div class="admin-cat-grid">
+            ${categories.map((c, idx) => `
+              <div class="admin-cat-card">
+                <span style="font-size: 2rem;">${c.icon || '✨'}</span>
+                <div>
+                  <strong>${c.name}</strong>
+                  <div style="font-size: 0.8rem; color: var(--text-light);">${c.slug} &bull; ${c.count || 10}+ Listed Vendors</div>
+                </div>
+                <button type="button" class="btn btn-outline btn-sm delete-cat-btn" data-index="${idx}" style="margin-left: auto;">
+                  Delete
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        `;
+
+        document.querySelectorAll('.delete-cat-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const idx = Number(btn.getAttribute('data-index'));
+            categories.splice(idx, 1);
+            AuthManager.saveCategories(categories);
+            renderCategories();
+          });
+        });
+      }
+
+      const catModal = document.getElementById('addCategoryModal');
+      document.getElementById('openAddCategoryBtn')?.addEventListener('click', () => catModal?.showModal());
+      document.getElementById('closeCatModalBtn')?.addEventListener('click', () => catModal?.close());
+
+      document.getElementById('addCategoryForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('newCatName').value.trim();
+        const icon = document.getElementById('newCatIcon').value.trim() || '✨';
+        if (name) {
+          const categories = AuthManager.getCategories();
+          categories.push({
+            id: 'cat_' + Date.now(),
+            name: name,
+            slug: name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+            icon: icon,
+            count: 0
+          });
+          AuthManager.saveCategories(categories);
+          document.getElementById('newCatName').value = '';
+          catModal?.close();
+          renderCategories();
+        }
+      });
+
+      // 8. Panel 5: Packages Management
+      function renderPackages() {
+        const packages = AuthManager.getPackages();
+        const wrap = document.getElementById('packagesManagerWrap');
+        if (!wrap) return;
+
+        wrap.innerHTML = `
+          <div class="admin-pkg-grid">
+            ${packages.map(p => `
+              <div class="admin-pkg-card">
+                <div>
+                  <h3 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--burgundy-deep);">${p.name}</h3>
+                  <p style="font-size: 0.85rem; color: var(--text-muted);">${p.guests}</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <span style="font-weight: 700; color: var(--gold-hover); font-size: 1.25rem;">${p.priceDisplay}</span>
+                  <button type="button" class="btn btn-outline btn-sm edit-pkg-btn" data-id="${p.id}" data-price="${p.price}">
+                    Edit Price
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+
+        document.querySelectorAll('.edit-pkg-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            const current = btn.getAttribute('data-price');
+            const newPrice = prompt('Enter new baseline price in INR (e.g. 749000):', current);
+            if (newPrice && !isNaN(newPrice)) {
+              const target = packages.find(p => p.id === id);
+              if (target) {
+                target.price = Number(newPrice);
+                target.priceDisplay = `₹${Number(newPrice).toLocaleString('en-IN')}`;
+                AuthManager.savePackages(packages);
+                renderPackages();
+              }
+            }
+          });
+        });
+      }
+
+      // 9. Panel 6: Booking Management
+      function renderBookings() {
+        const bookings = AuthManager.getBookings();
+        const wrap = document.getElementById('adminBookingsTableWrap');
+        if (!wrap) return;
+
+        wrap.innerHTML = `
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Ref ID</th>
+                <th>Client</th>
+                <th>Vendor / Service</th>
+                <th>Date</th>
+                <th>Estimate</th>
+                <th>Status</th>
+                <th>Manage</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${bookings.map(b => `
+                <tr>
+                  <td><span class="ref-pill">${b.referenceCode || b.id}</span></td>
+                  <td><strong>${b.customerName}</strong><br><small style="color: var(--text-muted);">${b.customerPhone}</small></td>
+                  <td><strong>${b.serviceName}</strong><br><small style="color: var(--text-light);">${b.vendorName}</small></td>
+                  <td>${b.eventDate}</td>
+                  <td><strong>${b.totalAmount}</strong></td>
+                  <td><span class="status-badge ${b.status?.toLowerCase()}">${b.status}</span></td>
+                  <td>
+                    <select class="admin-status-change form-control" data-id="${b.id}" style="padding: 0.3rem 0.5rem; font-size: 0.8rem; width: 110px;">
+                      <option value="Pending" ${b.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                      <option value="Confirmed" ${b.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+                      <option value="Rejected" ${b.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
+                    </select>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+
+        document.querySelectorAll('.admin-status-change').forEach(select => {
+          select.addEventListener('change', (e) => {
+            const id = select.getAttribute('data-id');
+            const newStatus = select.value;
+            AuthManager.updateBookingStatus(id, newStatus);
+            renderBookings();
+            renderOverview();
+          });
+        });
+      }
+
+      // 10. Logout
+      document.getElementById('adminLogoutBtn')?.addEventListener('click', () => {
+        AuthManager.logout();
+      });
+
+      updateMetrics();
+      renderOverview();
+      renderCustomers();
+      renderVendors();
+      renderCategories();
+      renderPackages();
+      renderBookings();
+    });
+  </script>
+</body>
+</html>
