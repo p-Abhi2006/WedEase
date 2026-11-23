@@ -1,0 +1,3 @@
+"""
+WedEase API package.
+"""
